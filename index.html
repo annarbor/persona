@@ -32,10 +32,10 @@
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
         Parse.Cloud.run('signin', {"assertion" : asertion}, {
           success: function(result) {
-            $('#signin').html("Current User...");
+            $('#signin_status').html("Current User..." + result);
           },
           error: function(error) {
-            $('#signin').html("Signout Error " + error.code);
+            $('#signin_status').html("Signout Error " + error.code);
           }
         });
         // 2. UI を更新する。
@@ -58,10 +58,10 @@
 //        });
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
-              $('#signin').html("Sign In with Persona");
+              $('#signin_status').html("Please Sign-In");
             },
             error: function(error) {
-              $('#signin').html("Signout Error " + error.code);
+              $('#signin_status').html("Signout Error " + error.code);
             }
           });
       }
@@ -78,7 +78,7 @@
 <div data-role="page" id="top" data-add-back-btn="true">
 <!-- ヘッダー -->
 <div data-role="header" id="signin_header">
-<h1>Please Signin</h1>
+<h1 id="signin_status">Please Sign-In</h1>
 </div>
 <!-- コンテンツ -->
 <div data-role="content">
