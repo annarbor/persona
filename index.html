@@ -32,7 +32,7 @@
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
        Parse.Cloud.run('signin', {"assertion" : asertion}, {
           success: function(result) {
-            alert (result);
+            window.location.reload();
           },
           error: function(error) {
             alert (error);
