@@ -30,13 +30,12 @@
       onlogin: function(assertion) {
         // ユーザがログインしました！ ここで必要なことは:
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
-       Parse.Cloud.run('signin', {"assertion" : asertion}, {
+        Parse.Cloud.run('signin', {"assertion" : asertion}, {
           success: function(result) {
-            $('#signin_header').html("Current User...");
-            window.location.reload();
+            $('#signin').html("Current User...");
           },
           error: function(error) {
-            alert (error);
+            $('#signin').html("Signout Error " + error.code);
           }
         });
         // 2. UI を更新する。
@@ -59,11 +58,10 @@
 //        });
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
-              $('#signin_header').html("Please Signin");
-              window.location.reload();
+              $('#signin').html("Sign In with Persona");
             },
             error: function(error) {
-              alert (error);
+              $('#signin').html("Signout Error " + error.code);
             }
           });
       }
