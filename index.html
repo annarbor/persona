@@ -26,13 +26,13 @@
     var currentUser = 'bob@example.com';
  
     navigator.id.watch({
-//      loggedInUser: currentUser,
+      loggedInUser: currentUser,
       onlogin: function(assertion) {
         // ユーザがログインしました！ ここで必要なことは:
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
         Parse.Cloud.run('signin', {"assertion" : asertion}, {
           success: function(result) {
-            var text = "Current User..." + result;
+            var text = "Current User...";
             $('#signin_status').html(text);
             alert (text);
           },
