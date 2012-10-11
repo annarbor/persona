@@ -15,12 +15,12 @@
 
     var signinLink = document.getElementById('signin');
     if (signinLink) {
-      signinLink.onclick = function() { navigator.id.request(); };
+      signinLink.onclick = function() { navigator.id.request(); };
     };
  
     var signoutLink = document.getElementById('signout');
     if (signoutLink) {
-      signoutLink.onclick = function() { navigator.id.logout(); };
+      signoutLink.onclick = function() { navigator.id.logout(); };
     };
 
     var currentUser = 'bob@example.com';
@@ -37,7 +37,7 @@
             alert (text);
           },
           error: function(error) {
-            $('#signin_status').html("Signout Error " + error.code);
+            alert("Signout Error " + error.code);
           }
         });
         // 2. UI を更新する。
@@ -61,9 +61,10 @@
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
               $('#signin_status').html("Signed out...Please Sign-In");
+              alert("Signed out...Please Sign-In");
             },
             error: function(error) {
-              $('#signin_status').html("Signout Error " + error.code);
+              alert("Signout Error " + error.code);
             }
           });
       }
