@@ -30,12 +30,13 @@
       onlogin: function(assertion) {
         // ユーザがログインしました！ ここで必要なことは:
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
-        Parse.Cloud.run('hello', {}, {
-          success: function(result) {
-          },
-          error: function(error) {
-          }
-        });
+//        Parse.Cloud.run('hello', {}, {
+//          success: function(result) {
+//          },
+//          error: function(error) {
+//          }
+//        });
+          alert (assertion);
         // 2. UI を更新する。
 //        $.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
 //         type: 'POST',
