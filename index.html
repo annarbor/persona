@@ -32,6 +32,7 @@
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
        Parse.Cloud.run('signin', {"assertion" : asertion}, {
           success: function(result) {
+            $('#signin_header').html("Current User...");
             window.location.reload();
           },
           error: function(error) {
@@ -58,6 +59,7 @@
 //        });
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
+              $('#signin_header').html("Please Signin");
               window.location.reload();
             },
             error: function(error) {
@@ -77,8 +79,8 @@
 <!-- ページ -->
 <div data-role="page" id="top" data-add-back-btn="true">
 <!-- ヘッダー -->
-<div data-role="header">
-<h1>ログイン</h1>
+<div data-role="header" id="signin_header">
+<h1>Please Signin</h1>
 </div>
 <!-- コンテンツ -->
 <div data-role="content">
