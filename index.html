@@ -56,6 +56,14 @@
 //          success: function(res, status, xhr) { window.location.reload(); },
 //          error: function(res, status, xhr) { alert("logout failure" + res); }
 //        });
+          Parse.Cloud.run('signout', {}, {
+            success: function(result) {
+              window.location.reload();
+            },
+            error: function(error) {
+              alert (error);
+            }
+          });
       }
     });
 
