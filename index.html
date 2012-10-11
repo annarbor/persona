@@ -30,7 +30,7 @@
       onlogin: function(assertion) {
         // ユーザがログインしました！ ここで必要なことは:
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
-        Parse.Cloud.run('signin', {"assertion" : asertion}, {
+        Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
             var text = "Current User...";
             $('#signin_status').html(text);
