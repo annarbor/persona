@@ -36,7 +36,7 @@
             $.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
               type: 'POST',
               url: 'https://verifier.login.persona.org/verify',
-              data: "assertion=" + assertion +"&audience=http://annarbor.github.com/:80",
+              data: "assertion=" + assertion +"&audience=https://annarbor.github.com/:80",
               success: function(res, status, xhr) { console.log("ok"); $('#signin_status').html("Welcome: " + currentUser); },
               error: function(res, status, xhr) { console.error("login failure" + res); }
             });
