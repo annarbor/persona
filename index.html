@@ -32,17 +32,17 @@
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
         Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
-            // 本来はバックエンド側の処理(Parseが3rd PartyへのHTTPリクエストの対応待ち
-            $.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
-              type: 'POST',
-              url: 'https://verifier.login.persona.org/verify',
-              data: "assertion=" + assertion +"&audience=https://annarbor.github.com/:80",
-              success: function(res, status, xhr) { console.log("ok"); $('#signin_status').html("Welcome: " + currentUser); },
-              error: function(res, status, xhr) { console.error("login failure" + res); }
-            });
+            // バックエンド側の処理(Parseが3rd PartyへのHTTPリクエストの対応待ち
+            //$.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
+            //  type: 'POST',
+            //  url: 'https://verifier.login.persona.org/verify',
+            //  data: "assertion=" + assertion +"&audience=https://annarbor.github.com/:80",
+            //  success: function(res, status, xhr) { console.log("ok"); $('#signin_status').html("Welcome: " + currentUser); },
+            //  error: function(res, status, xhr) { console.error("login failure" + res); }
+            //});
         // 2. UI を更新する。
-            //var text = "Welcome: " + currentUser;
-            //$('#signin_status').html(text);
+            var text = "Welcome: " + currentUser;
+            $('#signin_status').html(text);
           },
           error: function(error) {
             console.error("watch signin error:" + error.code); 
