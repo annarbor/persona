@@ -23,7 +23,8 @@
       signoutLink.onclick = function() { navigator.id.logout(); };
     };
 
-    var currentUser = 'bob@example.com';
+    var currentUser = '';
+    var currentUserId = '';
  
     navigator.id.watch({
       loggedInUser: currentUser,
@@ -41,6 +42,8 @@
             //  error: function(res, status, xhr) { console.error("login failure" + res); }
             //});
         // 2. UI を更新する。
+            currentUserId = result.id;
+            currentUser = result.email;
             var text = "Welcome: " + currentUser;
             $('#signin_status').html(text);
           },
@@ -54,6 +57,8 @@
         // リダイレクトするかバックエンドの呼び出しを行って、ユーザのセッションを破棄する。
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
+              currentUser = '';
+              currentUserId = '';
               $('#signin_status').html("Please Sign-In");
             },
             error: function(error) {
