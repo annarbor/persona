@@ -15,60 +15,41 @@
 
     var signinLink = document.getElementById('signin');
     if (signinLink) {
-      signinLink.onclick = function() { console.log("signin clink"); navigator.id.request(); };
+      signinLink.onclick = function() { navigator.id.request(); };
     };
  
     var signoutLink = document.getElementById('signout');
     if (signoutLink) {
-      signoutLink.onclick = function() { console.log("signout clink"); navigator.id.logout(); };
+      signoutLink.onclick = function() { navigator.id.logout(); };
     };
 
     var currentUser = 'bob@example.com';
  
     navigator.id.watch({
-      //loggedInUser: currentUser,
+      loggedInUser: currentUser,
       onlogin: function(assertion) {
         // ユーザがログインしました！ ここで必要なことは:
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
         Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
-            var text = "Current User...";
+        // 2. UI を更新する。
+            var text = "Wellcome: " + currentUser;
             $('#signin_status').html(text);
-            alert (text);
-            console.log("watch signin success"); 
           },
           error: function(error) {
-            alert("Signout Error " + error.code);
-            console.log("watch signin error"); 
+            console.error("watch signin error:" + error.code); 
           }
         });
-        // 2. UI を更新する。
-//        $.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
-//         type: 'POST',
-//          url: '/auth/login', // これは、あなたの Web サイト上の URL です。
-//          data: {assertion: assertion},
-//          success: function(res, status, xhr) { window.location.reload(); },
-//          error: function(res, status, xhr) { alert("login failure" + res); }
-//        });
       },
       onlogout: function() {
         // ユーザがログアウトしました！ ここで必要なことは:
         // リダイレクトするかバックエンドの呼び出しを行って、ユーザのセッションを破棄する。
-//        $.ajax({
-//          type: 'POST',
-//          url: '/auth/logout', // これは、あなたの Web サイト上の URL です。
-//          success: function(res, status, xhr) { window.location.reload(); },
-//          error: function(res, status, xhr) { alert("logout failure" + res); }
-//        });
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
-              $('#signin_status').html("Signed out...Please Sign-In");
-              alert("Signed out...Please Sign-In");
-              console.log("watch signout success"); 
+              $('#signin_status').html("Please Sign-In");
             },
             error: function(error) {
-              alert("Signout Error " + error.code);
-              console.log("watch signout error"); 
+              console.log("watch signout error:" + error.code); 
             }
           });
       }
