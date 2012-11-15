@@ -24,7 +24,6 @@
     };
 
     var currentUser = '';
-    var currentUserId = '';
  
     navigator.id.watch({
       loggedInUser: currentUser,
@@ -33,17 +32,14 @@
         // 1. 検証してセッションを作成するため、アサーションをバックエンドに送信する。
         Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
-            // バックエンド側の処理(Parseが3rd PartyへのHTTPリクエストの対応待ち
-            //$.ajax({ /* <-- この例では jQuery を使いますが、他のものも使えます */
-            //  type: 'POST',
-            //  url: 'https://verifier.login.persona.org/verify',
-            //  data: "assertion=" + assertion +"&audience=https://annarbor.github.com/:80",
-            //  success: function(res, status, xhr) { console.log("ok"); $('#signin_status').html("Welcome: " + currentUser); },
-            //  error: function(res, status, xhr) { console.error("login failure" + res); }
-            //});
         // 2. UI を更新する。
-            currentUserId = result.id;
-            currentUser = result.email;
+            var user = result.user;
+            if (user.isCurrent()) {
+              console.log ("Log in OK and Sesstion Established.");
+            } else {
+              console.log ("Log in OK but Sesstion could not be established.");
+            }
+            currentUser = user.getUsername();
             var text = "Welcome: " + currentUser;
             $('#signin_status').html(text);
           },
@@ -58,7 +54,6 @@
           Parse.Cloud.run('signout', {}, {
             success: function(result) {
               currentUser = '';
-              currentUserId = '';
               $('#signin_status').html("Please Sign-In");
             },
             error: function(error) {
