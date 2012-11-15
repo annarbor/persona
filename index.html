@@ -33,7 +33,7 @@
         Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
         // 2. UI を更新する。
-            currentUser = "<Authenticated User>";
+            currentUser = "[Authenticated User]";
             var text = "Welcome: " + currentUser;
             $('#signin_status').html(text);
           },
