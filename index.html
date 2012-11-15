@@ -33,13 +33,7 @@
         Parse.Cloud.run('signin', {"assertion" : assertion}, {
           success: function(result) {
         // 2. UI を更新する。
-            var user = result.user;
-            if (user.isCurrent()) {
-              console.log ("Log in OK and Sesstion Established.");
-            } else {
-              console.log ("Log in OK but Sesstion could not be established.");
-            }
-            currentUser = user.getUsername();
+            currentUser = "<Authenticated User>";
             var text = "Welcome: " + currentUser;
             $('#signin_status').html(text);
           },
